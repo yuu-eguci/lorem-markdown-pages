@@ -7,8 +7,8 @@ This repository tries to decorate Markdown documents using GitHub Pages, themes.
 
 ## Links
 
-- [document1](document1)
-- [document2](document2)
+- [/lorem-markdown-pages/document1](/lorem-markdown-pages/document1)
+- [/lorem-markdown-pages/document2](/lorem-markdown-pages/document2)
 
 ## Content
 
