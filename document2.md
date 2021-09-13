@@ -1,7 +1,17 @@
-document 2
+サンプル手順書
 ===
 
+## 手順
+
+### 1. 左のとこを見る
+
+![sample-image](https://user-images.githubusercontent.com/28250432/133046928-1552a1f7-e40b-4aca-8d28-cd86cad8ce23.png)
+
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc mauris neque, tempor a eros egestas, tincidunt aliquet mauris. Etiam commodo dolor sit amet gravida venenatis. Vestibulum ultrices magna ante, vitae vulputate est porttitor id. Vestibulum tempus, justo id porttitor lacinia, turpis ex maximus arcu, in euismod diam massa eu nisi. Vivamus feugiat purus eu metus commodo, a sodales orci blandit. Nulla malesuada semper quam quis rhoncus. Morbi ac est orci. Cras egestas ut mauris vitae aliquam. Integer vel venenatis lectus. Nullam laoreet consectetur diam, in mattis leo molestie et. Nulla blandit tellus id velit ornare convallis.
+
+### 2. 右のとこを見る
+
+![sample-image2](https://user-images.githubusercontent.com/28250432/133047393-49247d00-3dc3-49ef-85ef-765e3dac6b11.png)
 
 Suspendisse lorem purus, finibus sit amet erat quis, bibendum feugiat sem. Nullam tincidunt, nulla sit amet euismod volutpat, nunc tellus lacinia nunc, at elementum libero sapien et lectus. Phasellus tempus, est vitae ultricies interdum, libero ante laoreet ante, id rhoncus velit sem ut nunc. Etiam leo nisi, tincidunt non neque et, eleifend venenatis orci. Sed ut tortor condimentum, finibus ex vitae, pulvinar risus. Proin ut congue felis. Praesent vulputate sit amet enim non ultricies. Aenean quam augue, tincidunt vitae dictum ac, dignissim quis felis. Proin sapien purus, ultrices eu ligula vel, molestie fringilla mi. Aenean lobortis viverra magna. Nam porttitor felis sed nisl aliquam aliquam. Morbi in justo sit amet enim vulputate elementum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed ut lectus a nulla iaculis consectetur. Fusce dictum nisi at turpis egestas, vel facilisis neque molestie. Ut vel tincidunt neque.
 
