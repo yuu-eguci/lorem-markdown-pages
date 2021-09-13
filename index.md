@@ -5,6 +5,11 @@ lorem-markdown-pages
 
 This repository tries to decorate Markdown documents using GitHub Pages, themes.
 
+## Links
+
+- [/document1](/document1)
+- [/document2](/document2)
+
 ## Content
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc mauris neque, tempor a eros egestas, tincidunt aliquet mauris. Etiam commodo dolor sit amet gravida venenatis. Vestibulum ultrices magna ante, vitae vulputate est porttitor id. Vestibulum tempus, justo id porttitor lacinia, turpis ex maximus arcu, in euismod diam massa eu nisi. Vivamus feugiat purus eu metus commodo, a sodales orci blandit. Nulla malesuada semper quam quis rhoncus. Morbi ac est orci. Cras egestas ut mauris vitae aliquam. Integer vel venenatis lectus. Nullam laoreet consectetur diam, in mattis leo molestie et. Nulla blandit tellus id velit ornare convallis.
