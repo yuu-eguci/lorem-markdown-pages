@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "digest"
 require "test_helper"
 
 class SiteTest < Minitest::Test
@@ -33,14 +34,18 @@ class SiteTest < Minitest::Test
     end
   end
 
-  def test_external_scripts_use_https_and_subresource_integrity
-    external_scripts.each do |page, script|
-      message = "#{page}: #{script["src"]}"
-
-      assert(script["src"].start_with?("https://"), message)
-      assert(script["integrity"].to_s.start_with?("sha"), message)
-      assert_equal("anonymous", script["crossorigin"], message)
+  def test_scripts_are_same_origin
+    PAGES.each do |page|
+      html(page).css("script[src]").each do |script|
+        assert(script["src"].start_with?("#{BASEURL}/"), "#{page}: #{script["src"]}")
+      end
     end
+  end
+
+  def test_jquery_matches_the_official_release
+    digest = Digest::SHA256.file(File.join(SITE, "assets/js/jquery-3.7.1.min.js")).base64digest
+
+    assert_equal("/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=", digest)
   end
 
   def test_jquery_is_not_vulnerable
@@ -78,14 +83,6 @@ class SiteTest < Minitest::Test
   end
 
   private
-
-  def external_scripts
-    PAGES.flat_map do |page|
-      html(page).css("script[src]")
-                .reject { |script| script["src"].start_with?("#{BASEURL}/") }
-                .map { |script| [page, script] }
-    end
-  end
 
   def published?(url)
     path = File.join(SITE, url.delete_prefix(BASEURL).sub(/[?#].*/, ""))
