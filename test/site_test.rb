@@ -60,6 +60,10 @@ class SiteTest < Minitest::Test
     assert_empty(published & development_files)
   end
 
+  def test_markdown_sources_are_not_published
+    assert_empty(Dir.glob("**/*.md", base: SITE))
+  end
+
   def test_pages_declare_their_language
     { "index.html" => "en-US", "document1.html" => "en-US", "document2.html" => "ja-JP" }.each do |page, lang|
       assert_equal(lang, html(page).at("html")["lang"], page)
