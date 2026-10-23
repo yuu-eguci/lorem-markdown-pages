@@ -30,6 +30,12 @@ class BrowserTest < Minitest::Test
     end
   end
 
+  def test_pages_render_without_content_security_policy_violations
+    PAGES.each do |page|
+      assert_empty(console(page).lines.grep(/Content Security Policy/), page)
+    end
+  end
+
   private
 
   def ids(nodes)
@@ -37,14 +43,22 @@ class BrowserTest < Minitest::Test
   end
 
   def rendered(page)
-    @rendered ||= {}
-    @rendered[page] ||= begin
+    render(page).first
+  end
+
+  def console(page)
+    render(page).last
+  end
+
+  def render(page)
+    @render ||= {}
+    @render[page] ||= begin
       url = "http://127.0.0.1:#{SERVER.config[:Port]}#{BASEURL}/#{page}"
-      dom, status = Open3.capture2("chromium-headless-shell", "--no-sandbox", "--virtual-time-budget=10000",
-                                   "--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1",
-                                   "--dump-dom", url, err: File::NULL)
+      dom, log, status = Open3.capture3("chromium-headless-shell", "--no-sandbox", "--virtual-time-budget=10000",
+                                        "--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1",
+                                        "--enable-logging=stderr", "--v=0", "--dump-dom", url)
       assert(status.success?, url)
-      Nokogiri::HTML(dom)
+      [Nokogiri::HTML(dom), log]
     end
   end
 end

@@ -6,6 +6,21 @@ require "test_helper"
 class SiteTest < Minitest::Test
   include SiteFiles
 
+  CSP = "default-src 'none'; script-src 'self'; style-src 'self'; " \
+        "img-src 'self' https://user-images.githubusercontent.com; font-src 'self'; " \
+        "base-uri 'none'; form-action 'none'"
+
+  def test_pages_declare_the_content_security_policy_before_loading_resources
+    PAGES.each do |page|
+      head = html(page).at("head").element_children
+      csp = head.index { |node| node["http-equiv"] == "Content-Security-Policy" }
+
+      refute_nil(csp, page)
+      assert_equal(CSP, head[csp]["content"], page)
+      assert_operator(csp, :<, head.index { |node| %w[link script].include?(node.name) }, page)
+    end
+  end
+
   def test_pages_use_leap_day_theme
     PAGES.each do |page|
       stylesheets = html(page).css("link[rel=stylesheet]").map { |link| link["href"] }
@@ -25,11 +40,11 @@ class SiteTest < Minitest::Test
     end
   end
 
-  def test_images_have_alt_text_and_https_source
+  def test_images_have_alt_text_and_sources_allowed_by_the_policy
     PAGES.each do |page|
       html(page).css("img").each do |img|
         refute_empty(img["alt"].to_s, "#{page}: #{img["src"]}")
-        assert(img["src"].start_with?("https://", "#{BASEURL}/"), "#{page}: #{img["src"]}")
+        assert(allowed?("img-src", img["src"]), "#{page}: #{img["src"]}")
       end
     end
   end
@@ -83,6 +98,11 @@ class SiteTest < Minitest::Test
   end
 
   private
+
+  def allowed?(directive, url)
+    sources = CSP.split("; ").find { |rule| rule.start_with?("#{directive} ") }.split.drop(1)
+    sources.any? { |source| url.start_with?(source == "'self'" ? "#{BASEURL}/" : "#{source}/") }
+  end
 
   def published?(url)
     path = File.join(SITE, url.delete_prefix(BASEURL).sub(/[?#].*/, ""))
