@@ -1,17 +1,9 @@
 # frozen_string_literal: true
 
-require "fileutils"
-require "minitest/autorun"
-require "nokogiri"
-require "tmpdir"
+require "test_helper"
 
 class SiteTest < Minitest::Test
-  BASEURL = "/lorem-markdown-pages"
-  PAGES = %w[index.html document1.html document2.html].freeze
-  SITE = Dir.mktmpdir("lorem-markdown-pages-site")
-
-  system("bundle", "exec", "jekyll", "build", "--quiet", "--destination", SITE, exception: true)
-  Minitest.after_run { FileUtils.remove_entry(SITE) }
+  include SiteFiles
 
   def test_pages_use_leap_day_theme
     PAGES.each do |page|
@@ -69,10 +61,6 @@ class SiteTest < Minitest::Test
   end
 
   private
-
-  def html(page)
-    Nokogiri::HTML(File.read(File.join(SITE, page)))
-  end
 
   def external_scripts
     PAGES.flat_map do |page|
