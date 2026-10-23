@@ -1,3 +1,7 @@
+---
+lang: en-US
+---
+
 lorem-markdown-pages
 ===
 

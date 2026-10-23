@@ -16,6 +16,7 @@ This repository tries to decorate Markdown documents using GitHub Pages, themes.
 - 公開先: <https://yuu-eguci.github.io/lorem-markdown-pages/> (GitHub Pages、`main` の `/` をビルド)
 - Docker: 対応!
 - ランタイム: Ruby 3.3.12 + github-pages 232 (Jekyll 3.10.0)。GitHub Pages のビルド環境に合わせてある
+- ページ: front matter 付きの md がページになる (`index.md`・`document1.md`・`document2.md`)。生の md は公開しない。`README.md` はリポジトリ用なので除外
 - 言語: ページの front matter に `lang` を書くと `<html lang>` と `og:locale` に反映される (日本語の `document2.md` は `ja-JP`)。省略時は `en-US`
 - lint: RuboCop (Ruby) と mdl (Markdown)
 - テスト: Minitest。サイトをビルドして、リンク・画像・スクリプト・公開ファイル・言語指定・ズーム可否を確認する。見出しナビのリンクは headless Chromium で確認する (jQuery を CDN から読むのでネットワークが必要)
