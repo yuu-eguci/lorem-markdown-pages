@@ -1,0 +1,10 @@
+name: lorem-markdown-pages
+
+services:
+  site:
+    build: .
+    image: lorem-markdown-pages-site:local
+    ports:
+      - "127.0.0.1:4000:4000"
+    volumes:
+      - .:/srv/site:ro

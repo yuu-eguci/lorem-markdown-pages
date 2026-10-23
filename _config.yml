@@ -1,1 +1,9 @@
 theme: jekyll-theme-leap-day
+baseurl: /lorem-markdown-pages
+exclude:
+  - Dockerfile
+  - compose.yaml
+  - Gemfile
+  - Gemfile.lock
+  - Rakefile
+  - test
