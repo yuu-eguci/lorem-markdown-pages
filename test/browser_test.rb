@@ -41,6 +41,7 @@ class BrowserTest < Minitest::Test
     @rendered[page] ||= begin
       url = "http://127.0.0.1:#{SERVER.config[:Port]}#{BASEURL}/#{page}"
       dom, status = Open3.capture2("chromium-headless-shell", "--no-sandbox", "--virtual-time-budget=10000",
+                                   "--host-resolver-rules=MAP * ~NOTFOUND, EXCLUDE 127.0.0.1",
                                    "--dump-dom", url, err: File::NULL)
       assert(status.success?, url)
       Nokogiri::HTML(dom)
