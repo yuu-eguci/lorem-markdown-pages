@@ -84,6 +84,21 @@ class SiteTest < Minitest::Test
     assert_empty(Dir.glob("**/*.md", base: SITE))
   end
 
+  def test_images_declare_their_intrinsic_dimensions
+    PAGES.each do |page|
+      html(page).css("img").each do |img|
+        assert_match(/\A[1-9]\d*\z/, img["width"].to_s, "#{page}: #{img["src"]} width")
+        assert_match(/\A[1-9]\d*\z/, img["height"].to_s, "#{page}: #{img["src"]} height")
+      end
+    end
+  end
+
+  def test_stylesheet_scales_images_proportionally
+    css = File.read(File.join(SITE, "assets/css/style.css"))
+
+    assert(css.match?(/section img\s*\{[^}]*height:\s*auto/), "section img must keep height: auto")
+  end
+
   def test_pages_declare_their_language
     { "index.html" => "en-US", "document1.html" => "en-US", "document2.html" => "ja-JP" }.each do |page, lang|
       assert_equal(lang, html(page).at("html")["lang"], page)
