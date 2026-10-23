@@ -7,7 +7,7 @@ Minitest::TestTask.create
 desc "Lint Ruby and Markdown"
 task :lint do
   sh "rubocop"
-  sh "mdl", "--style", ".mdl_style.rb", *Dir["*.md"]
+  sh "mdl", "--style", ".mdl_style.rb", "--ignore-front-matter", *Dir["*.md"]
 end
 
 task default: %i[lint test]
