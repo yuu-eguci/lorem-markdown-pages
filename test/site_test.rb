@@ -60,6 +60,19 @@ class SiteTest < Minitest::Test
     assert_empty(published & development_files)
   end
 
+  def test_pages_declare_their_language
+    { "index.html" => "en-US", "document1.html" => "en-US", "document2.html" => "ja-JP" }.each do |page, lang|
+      assert_equal(lang, html(page).at("html")["lang"], page)
+      assert_equal(lang.tr("-", "_"), html(page).at("meta[property='og:locale']")["content"], page)
+    end
+  end
+
+  def test_viewport_allows_zoom
+    PAGES.each do |page|
+      assert_equal("width=device-width, initial-scale=1", html(page).at("meta[name=viewport]")["content"], page)
+    end
+  end
+
   private
 
   def external_scripts
