@@ -18,11 +18,12 @@ This repository tries to decorate Markdown documents using GitHub Pages, themes.
 - ランタイム: Ruby 3.3.12 + github-pages 232 (Jekyll 3.10.0)。GitHub Pages のビルド環境に合わせてある
 - ページ: front matter 付きの md がページになる (`index.md`・`document1.md`・`document2.md`)。生の md は公開しない。`README.md` はリポジトリ用なので除外
 - 言語: ページの front matter に `lang` を書くと `<html lang>` と `og:locale` に反映される (日本語の `document2.md` は `ja-JP`)。省略時は `en-US`
+- 画像: サンプル画像は Markdown の属性 (`{: width="1432" height="574"}`) で実寸を書いていて、読み込み中もレイアウトがずれない。テーマの `section img { max-width: 100% }` に `height: auto` を足す CSS (`assets/css/style.scss`) で、縮小しても比率が崩れない
 - lint: RuboCop (Ruby) と mdl (Markdown)
 - jQuery: 3.7.1 (MIT) を `assets/js/jquery-3.7.1.min.js` に同梱していて、外部 CDN は読まない。テストで公式リリースとハッシュが一致することを確認する
 - 対応ブラウザ: モダンブラウザだけ。IE 向けの html5shiv (外部 CDN) と `X-UA-Compatible` は外してあるので、HTML に外部スクリプトの参照はコメント内も含めて無い
 - CSP: `default-src 'none'` ベースの Content-Security-Policy を meta タグで付けている (script・style・font は同一オリジン、画像は同一オリジンと `user-images.githubusercontent.com` だけ)。GitHub Pages はレスポンスヘッダを設定できないので meta で、`frame-ancestors` みたいに meta では効かないものは入れていない
-- テスト: Minitest。サイトをビルドして、リンク・画像・スクリプト・公開ファイル・言語指定・ズーム可否・CSP を確認する。見出しナビのリンクと CSP 違反がないことは headless Chromium で確認する (外部ネットワークを遮断した状態で動くことを確認)
+- テスト: Minitest。サイトをビルドして、リンク・画像 (alt と寸法)・スクリプト・公開ファイル・言語指定・ズーム可否・CSP を確認する。見出しナビのリンクと CSP 違反がないことは headless Chromium で確認する (外部ネットワークを遮断した状態で動くことを確認)
 - CI: GitHub Actions で Docker イメージをビルドして lint とテストを実行する
 
 ## パッと実行してみたい

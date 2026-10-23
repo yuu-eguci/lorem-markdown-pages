@@ -1,0 +1,9 @@
+---
+---
+
+@import 'jekyll-theme-leap-day';
+
+// 画像に width/height を書いているため、 max-width で縮小しても比率が崩れないようにします。
+section img {
+  height: auto;
+}
