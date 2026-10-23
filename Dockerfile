@@ -3,7 +3,6 @@ FROM ruby:3.3.12-slim-trixie@sha256:4fe029f46a87c5e4a72d3b2ae18345852d6141344013
 ENV BUNDLE_DEPLOYMENT=true \
     BUNDLE_PATH=/usr/local/bundle \
     JEKYLL_BUILD_REVISION=local \
-    PAGES_DISABLE_NETWORK=1 \
     PAGES_REPO_NWO=yuu-eguci/lorem-markdown-pages
 WORKDIR /srv/site
 
