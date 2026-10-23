@@ -20,7 +20,8 @@ This repository tries to decorate Markdown documents using GitHub Pages, themes.
 - 言語: ページの front matter に `lang` を書くと `<html lang>` と `og:locale` に反映される (日本語の `document2.md` は `ja-JP`)。省略時は `en-US`
 - lint: RuboCop (Ruby) と mdl (Markdown)
 - jQuery: 3.7.1 (MIT) を `assets/js/jquery-3.7.1.min.js` に同梱していて、外部 CDN は読まない。テストで公式リリースとハッシュが一致することを確認する
-- テスト: Minitest。サイトをビルドして、リンク・画像・スクリプト・公開ファイル・言語指定・ズーム可否を確認する。見出しナビのリンクは headless Chromium で確認する (外部ネットワークを遮断した状態で動くことを確認)
+- CSP: `default-src 'none'` ベースの Content-Security-Policy を meta タグで付けている (script・style・font は同一オリジン、画像は同一オリジンと `user-images.githubusercontent.com` だけ)。GitHub Pages はレスポンスヘッダを設定できないので meta で、`frame-ancestors` みたいに meta では効かないものは入れていない
+- テスト: Minitest。サイトをビルドして、リンク・画像・スクリプト・公開ファイル・言語指定・ズーム可否・CSP を確認する。見出しナビのリンクと CSP 違反がないことは headless Chromium で確認する (外部ネットワークを遮断した状態で動くことを確認)
 - CI: GitHub Actions で Docker イメージをビルドして lint とテストを実行する
 
 ## パッと実行してみたい
