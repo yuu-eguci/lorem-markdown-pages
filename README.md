@@ -23,8 +23,8 @@ This repository tries to decorate Markdown documents using GitHub Pages, themes.
 - jQuery: 3.7.1 (MIT) を `assets/js/jquery-3.7.1.min.js` に同梱していて、外部 CDN は読まない。テストで公式リリースとハッシュが一致することを確認する
 - 対応ブラウザ: モダンブラウザだけ。IE 向けの html5shiv (外部 CDN) と `X-UA-Compatible` は外してあるので、HTML に外部スクリプトの参照はコメント内も含めて無い
 - CSP: `default-src 'none'` ベースの Content-Security-Policy を meta タグで付けている (script・style・font は同一オリジン、画像は同一オリジンと `user-images.githubusercontent.com` だけ)。GitHub Pages はレスポンスヘッダを設定できないので meta で、`frame-ancestors` みたいに meta では効かないものは入れていない
-- テスト: Minitest。サイトをビルドして、リンク・画像 (alt と寸法)・スクリプト・公開ファイル・言語指定・ズーム可否・CSP を確認する。見出しナビのリンクと CSP 違反がないことは headless Chromium で確認する (外部ネットワークを遮断した状態で動くことを確認)
-- CI: GitHub Actions で Docker イメージをビルドして lint とテストを実行する
+- テスト: Minitest。サイトをビルドして、リンク・画像 (alt と寸法)・スクリプト・公開ファイル・言語指定・ズーム可否・CSP を確認する。見出しナビのリンクと CSP 違反がないことは headless Chromium で確認する (外部ネットワークを遮断した状態で動くことを確認)。workflow の action が SHA 固定で permissions が読み取りだけなことも確認する
+- CI: GitHub Actions で Docker イメージをビルドして lint とテストを実行する。ビルドは `compose.yaml` を bake の定義として使い、BuildKit のレイヤーキャッシュを GitHub Actions のキャッシュに保存する (Gemfile.lock や Dockerfile が変わらなければ 2 回目以降は数秒)。action は全部コミット SHA で固定、permissions は `contents: read` だけ
 
 ## パッと実行してみたい
 
