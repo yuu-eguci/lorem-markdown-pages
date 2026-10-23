@@ -16,6 +16,9 @@ RUN bundle install && rm -rf /usr/local/bundle/cache
 
 FROM base
 
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends chromium-headless-shell \
+    && rm -rf /var/lib/apt/lists/*
 COPY --from=gems /usr/local/bundle /usr/local/bundle
 RUN useradd --create-home --uid 1000 site
 USER site

@@ -17,7 +17,7 @@ This repository tries to decorate Markdown documents using GitHub Pages, themes.
 - Docker: 対応!
 - ランタイム: Ruby 3.3.12 + github-pages 232 (Jekyll 3.10.0)。GitHub Pages のビルド環境に合わせてある
 - lint: RuboCop (Ruby) と mdl (Markdown)
-- テスト: Minitest。サイトをビルドして、リンク・画像・スクリプト・公開ファイルを確認する
+- テスト: Minitest。サイトをビルドして、リンク・画像・スクリプト・公開ファイルを確認する。見出しナビのリンクは headless Chromium で確認する (jQuery を CDN から読むのでネットワークが必要)
 - CI: GitHub Actions で Docker イメージをビルドして lint とテストを実行する
 
 ## パッと実行してみたい
