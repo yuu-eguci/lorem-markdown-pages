@@ -49,10 +49,10 @@ class SiteTest < Minitest::Test
     end
   end
 
-  def test_scripts_are_same_origin
+  def test_scripts_are_same_origin_even_inside_comments
     PAGES.each do |page|
-      html(page).css("script[src]").each do |script|
-        assert(script["src"].start_with?("#{BASEURL}/"), "#{page}: #{script["src"]}")
+      File.read(File.join(SITE, page)).scan(/<script\b[^>]*\ssrc=["']([^"']+)["']/i).flatten.each do |src|
+        assert(src.start_with?("#{BASEURL}/"), "#{page}: #{src}")
       end
     end
   end
