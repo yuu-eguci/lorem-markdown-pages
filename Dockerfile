@@ -1,10 +1,13 @@
-FROM ruby:3.3.12-slim-trixie@sha256:4fe029f46a87c5e4a72d3b2ae18345852d6141344013308887eef1ebc1e18d32 AS base
+FROM ruby:3.3.14-slim-trixie@sha256:c285f774b589eb8ded47aaa8ed83fc0d23cbebb10fb0dea71151e65aeace1853 AS base
 
 ENV BUNDLE_DEPLOYMENT=true \
     BUNDLE_PATH=/usr/local/bundle \
     JEKYLL_BUILD_REVISION=local \
     PAGES_REPO_NWO=yuu-eguci/lorem-markdown-pages
 WORKDIR /srv/site
+RUN gem update --system 4.1.0 --no-document \
+    && gem uninstall --executables rubygems-update \
+    && rm -rf /usr/local/bundle/cache
 
 FROM base AS gems
 

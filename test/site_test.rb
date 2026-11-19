@@ -58,9 +58,9 @@ class SiteTest < Minitest::Test
   end
 
   def test_jquery_matches_the_official_release
-    digest = Digest::SHA256.file(File.join(SITE, "assets/js/jquery-3.7.1.min.js")).base64digest
+    digest = Digest::SHA256.file(File.join(SITE, "assets/js/jquery-4.1.0.min.js")).base64digest
 
-    assert_equal("/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=", digest)
+    assert_equal("hjRvPkFLO1JGZFMXGrzdpG6TlsHDyjp4PQeqLWRcMzk=", digest)
   end
 
   def test_jquery_is_not_vulnerable
