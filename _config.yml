@@ -7,4 +7,8 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - Rakefile
+  - package.json
+  - package-lock.json
+  - tsconfig.json
+  - assets/js/main.ts
   - test
