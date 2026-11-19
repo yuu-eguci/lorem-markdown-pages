@@ -1,0 +1,21 @@
+{
+  "private": true,
+  "type": "module",
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^26.13.1",
+      "onFail": "error"
+    },
+    "packageManager": {
+      "name": "npm",
+      "version": "^12.2.3",
+      "onFail": "error"
+    }
+  },
+  "devDependencies": {
+    "@types/jquery": "^4.0.1",
+    "@types/node": "^26.6.6",
+    "typescript": "^7.0.2"
+  }
+}

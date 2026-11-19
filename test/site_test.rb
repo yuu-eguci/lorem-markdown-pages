@@ -75,9 +75,14 @@ class SiteTest < Minitest::Test
 
   def test_development_files_are_not_published
     published = Dir.children(SITE)
-    development_files = %w[Dockerfile compose.yaml Gemfile Gemfile.lock Rakefile test]
+    development_files = %w[Dockerfile compose.yaml Gemfile Gemfile.lock Rakefile package.json package-lock.json
+                           tsconfig.json test]
 
     assert_empty(published & development_files)
+  end
+
+  def test_typescript_sources_are_not_published
+    assert_empty(Dir.glob("**/*.ts", base: SITE))
   end
 
   def test_markdown_sources_are_not_published
